@@ -1,0 +1,86 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: delugevpn
+  name: delugevpn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: delugevpn
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: delugevpn
+    spec:
+      containers:
+        - name: delugevpn
+          image: binhex/arch-delugevpn:latest
+          securityContext:
+            capabilities:
+              add: ["NET_ADMIN"]
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: America/Denver
+            - name: UMASK_SET
+              value: "022"
+            - name: DELUGE_LOGLEVEL
+              value: "debug"
+            - name: DELUGE_WEB_LOG_LEVEL
+              value: "debug"
+            - name: VPN_ENABLED
+              value: "yes"
+            - name: VPN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: credentials
+                  key: "username"
+            - name: VPN_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: credentials
+                  key: "password"
+            - name: VPN_PROV
+              value: "airvpn"
+            - name: VPN_CLIENT
+              value: "openvpn"
+            - name: ADDITIONAL_PORTS
+              value: "12022"
+            - name: STRICT_PORT_FORWARD
+              value: "no"
+            - name: ENABLE_PRIVOXY
+              value: "no"
+            - name: LAN_NETWORK
+              value: "192.168.0.1/24"
+          ports:
+            - containerPort: 12022
+              name: inbound-tcp
+              protocol: TCP
+            - containerPort: 12022
+              name: inbound-udp
+              protocol: UDP
+          volumeMounts:
+            - name: delugevpn
+              mountPath: /config
+              subPath: deluge/config
+            - name: delugevpn
+              mountPath: /downloads
+              subPath: deluge/downloads
+            - name: vpn-credentials
+              mountPath: /config/vpn-credentials
+              readOnly: true
+      volumes:
+        - name: delugevpn
+          persistentVolumeClaim:
+            claimName: synology-delugevpn
+        - name: vpn-credentials
+          secret:
+            secretName: credentials

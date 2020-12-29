@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: synology-delugevpn
+  namespace: default
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: synology-5tb
+  resources:
+    requests:
+      storage: 5000Gi
