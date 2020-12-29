@@ -41,12 +41,12 @@ spec:
             - name: VPN_USER
               valueFrom:
                 secretKeyRef:
-                  name: credentials
+                  name: vpn-credentials
                   key: "username"
             - name: VPN_PASS
               valueFrom:
                 secretKeyRef:
-                  name: credentials
+                  name: vpn-credentials
                   key: "password"
             - name: VPN_PROV
               value: "airvpn"
@@ -83,4 +83,4 @@ spec:
             claimName: synology-delugevpn
         - name: vpn-credentials
           secret:
-            secretName: credentials
+            secretName: vpn-credentials
