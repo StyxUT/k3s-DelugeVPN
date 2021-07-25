@@ -53,7 +53,7 @@ spec:
             - name: VPN_CLIENT
               value: "openvpn"
             - name: ADDITIONAL_PORTS
-              value: "12022"
+              value: "12028"
             - name: STRICT_PORT_FORWARD
               value: "no"
             - name: ENABLE_PRIVOXY
@@ -61,10 +61,10 @@ spec:
             - name: LAN_NETWORK
               value: "192.168.0.1/24"
           ports:
-            - containerPort: 12022
+            - containerPort: 12028
               name: inbound-tcp
               protocol: TCP
-            - containerPort: 12022
+            - containerPort: 12028
               name: inbound-udp
               protocol: UDP
           volumeMounts:
@@ -74,13 +74,13 @@ spec:
             - name: delugevpn
               mountPath: /downloads
               subPath: deluge/downloads
-            - name: vpn-credentials
-              mountPath: /config/vpn-credentials
-              readOnly: true
+              #- name: vpn-credentials
+              #mountPath: /config/vpn-credentials
+              #readOnly: true
       volumes:
         - name: delugevpn
           persistentVolumeClaim:
             claimName: synology-delugevpn
-        - name: vpn-credentials
-          secret:
-            secretName: vpn-credentials
+            #        - name: vpn-credentials
+            #secret:
+            #secretName: vpn-credentials
