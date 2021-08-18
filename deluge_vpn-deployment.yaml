@@ -74,13 +74,7 @@ spec:
             - name: delugevpn
               mountPath: /downloads
               subPath: deluge/downloads
-              #- name: vpn-credentials
-              #mountPath: /config/vpn-credentials
-              #readOnly: true
       volumes:
         - name: delugevpn
           persistentVolumeClaim:
             claimName: synology-delugevpn
-            #        - name: vpn-credentials
-            #secret:
-            #secretName: vpn-credentials
