@@ -29,7 +29,7 @@ spec:
             - name: PGID
               value: "1000"
             - name: TZ
-              value: America/Denver
+              value: "America/Denver"
             - name: UMASK_SET
               value: "022"
             - name: DELUGE_LOGLEVEL

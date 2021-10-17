@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata: 
-  name: synology-5tb
+  name: synology-delugevpn
 spec:
   capacity:
     storage: 5000Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: synology-5tb
+  storageClassName: synology
   persistentVolumeReclaimPolicy: Retain
   mountOptions:
     - hard

@@ -6,7 +6,7 @@ metadata:
 spec:
   accessModes:
   - ReadWriteOnce
-  storageClassName: synology-5tb
+  storageClassName: synology
   resources:
     requests:
       storage: 5000Gi
