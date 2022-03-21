@@ -34,9 +34,11 @@ spec:
             - name: UMASK_SET
               value: "022"
             - name: DELUGE_LOGLEVEL
-              value: "debug"
+              value: "error"
             - name: DELUGE_WEB_LOG_LEVEL
-              value: "debug"
+              value: "error"
+            - name: DEBUG
+              value: "false"
             - name: VPN_ENABLED
               value: "yes"
             - name: VPN_USER
@@ -75,7 +77,22 @@ spec:
             - name: delugevpn
               mountPath: /downloads
               subPath: deluge/downloads
+            - name: deluge-media
+              mountPath: /video/Movies
+              subPath: Movies
+            - name: deluge-media
+              mountPath: /video/TV
+              subPath: TV
+            - name: proxmox-temp
+              mountPath: /deluge-temp
+              #subPath: deluge-temp
       volumes:
         - name: delugevpn
           persistentVolumeClaim:
             claimName: synology-delugevpn
+        - name: deluge-media
+          persistentVolumeClaim:
+            claimName: synology-deluge-media
+        - name: proxmox-temp
+          persistentVolumeClaim:
+            claimName: proxmox-deluge-temp

@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: synology-delugevpn
+  name: proxmox-deluge-temp
   namespace: default
 spec:
   accessModes:
   - ReadWriteOnce
-  storageClassName: synology
+  storageClassName: proxmox
   resources:
     requests:
-      storage: 500Gi
+      storage: 100Gi
