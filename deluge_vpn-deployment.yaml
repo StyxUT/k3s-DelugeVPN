@@ -74,25 +74,12 @@ spec:
             - name: delugevpn
               mountPath: /config
               subPath: deluge/config
-            - name: delugevpn
-              mountPath: /downloads
-              subPath: deluge/downloads
-            - name: deluge-media
-              mountPath: /video/Movies
-              subPath: Movies
-            - name: deluge-media
-              mountPath: /video/TV
-              subPath: TV
-            - name: proxmox-temp
-              mountPath: /deluge-temp
-              #subPath: deluge-temp
+            - name: synology-torrents
+              mountPath: /torrents
       volumes:
         - name: delugevpn
           persistentVolumeClaim:
             claimName: synology-delugevpn
-        - name: deluge-media
+        - name: synology-torrents
           persistentVolumeClaim:
-            claimName: synology-deluge-media
-        - name: proxmox-temp
-          persistentVolumeClaim:
-            claimName: proxmox-deluge-temp
+            claimName: synology-torrents
