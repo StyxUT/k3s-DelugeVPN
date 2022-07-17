@@ -77,12 +77,12 @@ spec:
             - name: k8s-pv01
               mountPath: /downloads
               subPath: deluge/downloads
-            - name: torrents
+            - name: data
               mountPath: data/torrents
       volumes:
         - name: k8s-pv01
           persistentVolumeClaim:
             claimName: synology-k8s-pv01
-        - name: torrents
+        - name: data
           persistentVolumeClaim:
-            claimName: synology-torrents
+            claimName: synology-data
