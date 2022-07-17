@@ -20,19 +20,19 @@ spec:
       containers:
         - name: delugevpn
           image: binhex/arch-delugevpn:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
               add: ["NET_ADMIN"]
           env:
             - name: PUID
-              value: "1000"
+              value: "222"
             - name: PGID
-              value: "1000"
+              value: "321"
+            - name: UMASK_SET
+              value: "002"
             - name: TZ
               value: "America/Denver"
-            - name: UMASK_SET
-              value: "022"
             - name: DELUGE_LOGLEVEL
               value: "error"
             - name: DELUGE_WEB_LOG_LEVEL
@@ -71,15 +71,18 @@ spec:
               name: inbound-udp
               protocol: UDP
           volumeMounts:
-            - name: delugevpn
+            - name: k8s-pv01
               mountPath: /config
               subPath: deluge/config
-            - name: synology-torrents
-              mountPath: /torrents
+            - name: k8s-pv01
+              mountPath: /downloads
+              subPath: deluge/downloads
+            - name: torrents
+              mountPath: data/torrents
       volumes:
-        - name: delugevpn
+        - name: k8s-pv01
           persistentVolumeClaim:
-            claimName: synology-delugevpn
-        - name: synology-torrents
+            claimName: synology-k8s-pv01
+        - name: torrents
           persistentVolumeClaim:
             claimName: synology-torrents
