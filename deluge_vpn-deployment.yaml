@@ -78,7 +78,8 @@ spec:
               mountPath: /downloads
               subPath: deluge/downloads
             - name: data
-              mountPath: data/torrents
+              mountPath: /data/torrents
+              subPath: torrents
       volumes:
         - name: k8s-pv01
           persistentVolumeClaim:
