@@ -20,10 +20,15 @@ spec:
       containers:
         - name: delugevpn
           image: binhex/arch-delugevpn:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           securityContext:
             capabilities:
               add: ["NET_ADMIN"]
+          resources:
+            requests:
+              ephemeral-storage: "2Gi"
+            limits:
+              ephemeral-storage: "4Gi"
           env:
             - name: PUID
               value: "222"
@@ -41,16 +46,16 @@ spec:
               value: "false"
             - name: VPN_ENABLED
               value: "yes"
-            - name: VPN_USER
-              valueFrom:
-                secretKeyRef:
-                  name: vpn-credentials
-                  key: "username"
-            - name: VPN_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: vpn-credentials
-                  key: "password"
+#            - name: VPN_USER
+#              valueFrom:
+#                secretKeyRef:
+#                  name: vpn-credentials
+#                  key: "username"
+#            - name: VPN_PASS
+#              valueFrom:
+#                secretKeyRef:
+#                  name: vpn-credentials
+#                  key: "password"
             - name: VPN_PROV
               value: "airvpn"
             - name: VPN_CLIENT
