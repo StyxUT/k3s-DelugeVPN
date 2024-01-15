@@ -46,16 +46,6 @@ spec:
               value: "false"
             - name: VPN_ENABLED
               value: "yes"
-#            - name: VPN_USER
-#              valueFrom:
-#                secretKeyRef:
-#                  name: vpn-credentials
-#                  key: "username"
-#            - name: VPN_PASS
-#              valueFrom:
-#                secretKeyRef:
-#                  name: vpn-credentials
-#                  key: "password"
             - name: VPN_PROV
               value: "airvpn"
             - name: VPN_CLIENT

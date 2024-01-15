@@ -12,18 +12,6 @@ spec:
       port: 8112
       protocol: TCP
       targetPort: 8112
-    - name: deluge-daemon
-      port: 58846
-      protocol: TCP
-      targetPort: 58846
-    - name: unknown
-      port: 59846
-      protocol: TCP
-      targetPort: 59846
-    # - name: daemon
-    #   port: 58846
-    #   protocol: TCP
-    #   targetPort: 58846
     - name: incoming-tcp
       port: 12022
       protocol: TCP
