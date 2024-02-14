@@ -50,8 +50,6 @@ spec:
               value: "airvpn"
             - name: VPN_CLIENT
               value: "openvpn"
-            - name: ADDITIONAL_PORTS
-              value: "12028"
             - name: STRICT_PORT_FORWARD
               value: "no"
             - name: ENABLE_PRIVOXY
@@ -59,10 +57,10 @@ spec:
             - name: LAN_NETWORK
               value: "192.168.0.1/24"
           ports:
-            - containerPort: 12028
+            - containerPort: 12049
               name: inbound-tcp
               protocol: TCP
-            - containerPort: 12028
+            - containerPort: 12049
               name: inbound-udp
               protocol: UDP
           volumeMounts:

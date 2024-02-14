@@ -13,15 +13,16 @@ spec:
       protocol: TCP
       targetPort: 8112
     - name: incoming-tcp
-      port: 12022
+      port: 12049
       protocol: TCP
-      targetPort: 12022
+      targetPort: 12049
     - name: incoming-udp
-      port: 12022
+      port: 12049
       protocol: UDP
-      targetPort: 12022
+      targetPort: 12049
   externalIPs:
     - 192.168.0.211
     - 192.168.0.221
     - 192.168.0.222
     - 192.168.0.223
+    - 192.168.0.224
