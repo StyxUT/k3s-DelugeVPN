@@ -17,6 +17,15 @@ spec:
       labels:
         app: delugevpn
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: tpu
+                operator: NotIn
+                values:
+                - "true"
       containers:
         - name: delugevpn
           image: binhex/arch-delugevpn:latest
@@ -55,7 +64,7 @@ spec:
             - name: ENABLE_PRIVOXY
               value: "no"
             - name: LAN_NETWORK
-              value: "192.168.0.1/24"
+              value: "192.168.0.0/24"
           ports:
             - containerPort: 12049
               name: inbound-tcp
