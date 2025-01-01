@@ -33,6 +33,7 @@ spec:
           securityContext:
             capabilities:
               add: ["NET_ADMIN"]
+            privileged: true
           resources:
             requests:
               ephemeral-storage: "2Gi"
@@ -66,23 +67,28 @@ spec:
             - name: LAN_NETWORK
               value: "192.168.0.0/24"
           ports:
-            - containerPort: 12049
+            - containerPort: 12048
               name: inbound-tcp
               protocol: TCP
             - containerPort: 12049
               name: inbound-udp
               protocol: UDP
           volumeMounts:
+            - name: tun
+              mountPath: /dev/net/tun
             - name: k8s-pv02
               mountPath: /config
-              subPath: deluge/config
+              subPath: delugevpn/config
             - name: k8s-pv02
               mountPath: /downloads
-              subPath: deluge/downloads
+              subPath: delugevpn/downloads
             - name: data
               mountPath: /data/torrents
               subPath: torrents
       volumes:
+        - name: tun
+          hostPath:
+            path: /dev/net/tun
         - name: k8s-pv02
           persistentVolumeClaim:
             claimName: synology-k8s-pv02
